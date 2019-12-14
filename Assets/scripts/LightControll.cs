@@ -16,7 +16,7 @@ public class LightControll : MonoBehaviour
 
     void Start()
     {
-        _light.range = 20f;
+        _light.range = 3f;
     }
 
     // Update is called once per frame
