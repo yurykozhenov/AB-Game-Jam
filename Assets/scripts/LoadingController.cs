@@ -17,7 +17,6 @@ public class LoadingController : MonoBehaviour
 
     public void ChangeVolume(float volume)
     {
-        Debug.Log(volume);
         audioMixer.SetFloat("volume", volume);
     }
  
