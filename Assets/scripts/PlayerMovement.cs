@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using Game.Player.Controller;
 
 public class PlayerMovement : MonoBehaviour {
-    public float moveSpeed = 2.5f;
-    public float jumpForce = 250.0f;
+    public float moveSpeed = 2.9f;
+    public float jumpForce = 850.0f;
     public bool facingRight = true;
 
     // public Transform groundCheck;
@@ -12,11 +13,17 @@ public class PlayerMovement : MonoBehaviour {
     // bool grounded;
 	
     Rigidbody2D rb;
-    
+
+    private Moving Moves;
     // Use this for initialization
+    
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
+        Moves = new Moving();
+        Moves.Setup(rb, moveSpeed);
+
     }
 	
     // Update is called once per frame
@@ -26,21 +33,21 @@ public class PlayerMovement : MonoBehaviour {
 		
         var moveHorizontal = Input.GetAxis("Horizontal");
         
-        rb.velocity = new Vector2(moveHorizontal * moveSpeed, rb.velocity.y);
-
+        Moves.Run(moveHorizontal);
+        
         if (moveHorizontal < 0 && facingRight || moveHorizontal > 0 && !facingRight)
         {
             Flip();
+        }
+        
+        if (Input.GetButtonDown("Jump")) //  && grounded
+        {
+            Moves.Jump(Vector2.up * jumpForce);
         }
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump")) //  && grounded
-        {
-            rb.AddForce(Vector2.up * jumpForce);
-        }
-
         if (transform.position.y < 0)
         {
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
