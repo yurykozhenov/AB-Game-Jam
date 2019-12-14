@@ -1,18 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
 
 public class LoadingController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public AudioMixer audioMixer;
+
+    public void StartGame()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeVolume(float volume)
     {
-        
+        Debug.Log(volume);
+        audioMixer.SetFloat("volume", volume);
+    }
+ 
+    public void ExitGame()
+    {
+        Debug.Log("Quit!");
+        Application.Quit();
     }
 }
