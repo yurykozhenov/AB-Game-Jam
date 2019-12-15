@@ -24,4 +24,10 @@ namespace Game.Player.Controller
             body.AddForce(Pover);
         }
     }
+
+    public class Light
+    {
+        private Light _light;
+        
+    }
 }
