@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
     // bool grounded;
 	
     Rigidbody2D rb;
+    Animator animator;
 
     private Moving Moves;
     // Use this for initialization
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
         rb.freezeRotation = true;
         Moves = new Moving();
         Moves.Setup(rb, moveSpeed);
+        animator = GetComponent<Animator>();
     }
 	
     // Update is called once per frame
@@ -50,6 +52,7 @@ public class PlayerMovement : MonoBehaviour {
             Moves.Jump(Vector2.up * jumpForce);
         }
         
+        animator.SetFloat("velocityX", rb.velocity.x);
     }
 
     void Update()
