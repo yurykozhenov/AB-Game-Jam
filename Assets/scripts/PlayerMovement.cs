@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpForce = 850.0f;
     public bool facingRight = true;
 
+    public GameObject cam;
     // public Transform groundCheck;
     // public float groundRadius = 0.1f;
     // public LayerMask whatIsGround;
@@ -23,7 +24,6 @@ public class PlayerMovement : MonoBehaviour {
         rb.freezeRotation = true;
         Moves = new Moving();
         Moves.Setup(rb, moveSpeed);
-
     }
 	
     // Update is called once per frame
@@ -39,11 +39,17 @@ public class PlayerMovement : MonoBehaviour {
         {
             Flip();
         }
+
+        if (rb.position.y >= 30 || rb.position.y <= 530)
+        {
+            cam.transform.position = new Vector3(cam.transform.position.x, rb.position.y, cam.transform.position.z);
+        }
         
         if (Input.GetButtonDown("Jump")) //  && grounded
         {
             Moves.Jump(Vector2.up * jumpForce);
         }
+        
     }
 
     void Update()
