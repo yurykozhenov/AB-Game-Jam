@@ -21,7 +21,7 @@ public class Player3DController : MonoBehaviour {
 
         if (moveHorizontal < 0 && facingRight || moveHorizontal > 0 && !facingRight)
         {
-            Flip();
+            // Flip();
         }
     }
 
