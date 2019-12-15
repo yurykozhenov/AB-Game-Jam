@@ -2,7 +2,7 @@
 
 public class GravityController : MonoBehaviour
 {
-    public Transform attractor;
+    public Collider attractor;
     public float gravityScale;
     
     private Rigidbody rb;
@@ -13,6 +13,6 @@ public class GravityController : MonoBehaviour
     
     void FixedUpdate()
     {
-        rb.position = Vector3.MoveTowards(rb.position, attractor.position, gravityScale * Time.deltaTime);
+        rb.position = Vector3.MoveTowards(rb.position, attractor.ClosestPointOnBounds(rb.position), gravityScale * Time.deltaTime);
     }
 }
